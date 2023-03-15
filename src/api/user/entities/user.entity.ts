@@ -1,8 +1,13 @@
+/* eslint-disable prettier/prettier */
 import { Exclude } from 'class-transformer';
-import { Column, Entity, Index } from 'typeorm';
+import {
+  Column,
+  Entity,
+} from 'typeorm';
 import { UserGender } from '../enums/userGender.enum';
 import { UserRoles } from '../enums/roles.enum';
 import { AuditEntity } from '../../../common/db/customBaseEntites/AuditEntity';
+import { UserStatus } from '../enums/userStatus';
 
 @Entity('users')
 export class User extends AuditEntity {
@@ -12,6 +17,7 @@ export class User extends AuditEntity {
     enum: UserRoles,
   })
   role: UserRoles;
+
   @Column({ default: false })
   isRoleOverridden: boolean;
 
@@ -25,7 +31,6 @@ export class User extends AuditEntity {
   lastName: string;
 
   @Column({ unique: true })
-  @Index()
   email: string;
 
   @Column({ unique: true })
@@ -47,9 +52,26 @@ export class User extends AuditEntity {
   })
   gender: UserGender;
 
+  @Column({
+    type: 'enum',
+    nullable: false,
+    enum: UserStatus,
+    default: UserStatus.OFFLINE,
+  })
+  status: UserStatus;
+
   @Column({ nullable: true })
   phone: string;
 
   @Column({ nullable: true })
   timezone: string;
-}
+
+  @Column({ nullable: true })
+  birthdate: Date;
+
+  @Column({ default: false })
+  is_verified: boolean;
+
+  @Column({ nullable: true })
+  avatar: string;
+} 

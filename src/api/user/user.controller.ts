@@ -63,7 +63,7 @@ export class UserController implements IUserController {
     return await this.usersService.findOne(userId);
   }
 
-  @Roles(UserRoles.ADMIN)
+  @Roles(UserRoles.USER)
   @Get()
   @UseInterceptors(PaginationInterceptor)
   async findAll(): Promise<User[]> {
