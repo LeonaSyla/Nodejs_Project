@@ -22,12 +22,14 @@ export class ProjectController {
   async getProject(): Promise<Project[]> {
     return await this.projectService.getProject();
   }
-  
+
+  @Public()
   @Post()
   async createProject(@Body() projectDto: CreateProjectDto): Promise<Project> {
     return await this.projectService.createProject(projectDto);
   }
-
+  
+  @Public()
   @Put(':id')
 async updateProject(
   @Param('id', ParseIntPipe) id: number,
