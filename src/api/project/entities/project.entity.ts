@@ -23,5 +23,4 @@ export class Project extends AuditEntity{
     @ManyToMany(() => User)
     @JoinTable()
     users: User[];
-  description: any;
 }

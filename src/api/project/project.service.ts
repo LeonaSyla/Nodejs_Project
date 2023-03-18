@@ -1,8 +1,11 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { ProjectRepository } from './repository/project.repository';
 import { Project } from './entities/project.entity';
 import {  CreateProjectDto } from './dtos/create-project.dto';
+import {  UpdateProjectDto } from './dtos/update-project.dto';
 
 
 @Injectable()
@@ -17,8 +20,18 @@ export class ProjectService {
     return await this.projectRepository.saveProject(projectDto);
   }
 
-  async updateProject(id: number, project: CreateProjectDto): Promise<Project> {
-    return await this.projectRepository.updateProject(id, project);
+  
+
+  async getProjectById(projectId: string) :Promise<Project>{
+    return await this.projectRepository.getProjectById(projectId)
+  }
+
+  async updateProject(projectId: string, updateProjectDto : UpdateProjectDto) : Promise<Project>{
+    return await this.projectRepository.updateProject(projectId,updateProjectDto)
+  }
+
+  async removeProject(projectId:string) : Promise<void>{
+    return await this.projectRepository.removeProject(projectId);
   }
   
 }

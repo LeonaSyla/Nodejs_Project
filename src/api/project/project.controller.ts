@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards } from '@nestjs/common';
 import { ProjectService } from './project.service';
 import { Project } from './entities/project.entity';
 import { ApiTags } from '@nestjs/swagger';
@@ -32,9 +32,24 @@ export class ProjectController {
   @Public()
   @Put(':id')
 async updateProject(
-  @Param('id', ParseIntPipe) id: number,
+  @Param('id', ParseIntPipe) id: string,
   @Body() project: CreateProjectDto,
 ): Promise<Project> {
   return await this.projectService.updateProject(id, project);
+  }
+
+ @Public()
+    @Get(':id')
+    async getProjectById(@Param('id') id : string) : Promise<Project>{
+      return await this.projectService.getProjectById(id);
+    }
+
+    @Public()
+    @Delete(':id')
+    async removeProject(@Param('id') id:string) : Promise<void>{
+      return await this.projectService.removeProject(id);
+    }
+    
 }
-}
+
+

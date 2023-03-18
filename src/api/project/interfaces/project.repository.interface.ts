@@ -8,5 +8,8 @@ import { CreateProjectDto } from '../dtos/projects.dto';
 export interface IProjectRepository extends IBaseCustomRepository<Project> {
   getProject(): Promise<Project[]>;
   saveProject(project: CreateProjectDto);
-  updateProject(id: number, project: CreateProjectDto): Promise<Project>;
+  updateProject(id: string, project: CreateProjectDto): Promise<Project>;
+  getProjectById(projectId:string):Promise<Project>
+  removeProject(projectId: string): Promise<void> 
+  
 }
