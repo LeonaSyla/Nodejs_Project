@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Report } from 'src/api/report/entities/report.entity';
+import { Task } from 'src/api/task/entities/task.entity';
 import { User } from 'src/api/user/entities/user.entity';
 import { AuditEntity } from 'src/common/db/customBaseEntites/AuditEntity';
 import { Entity, Column, ManyToMany, JoinTable, ManyToOne, OneToMany} from 'typeorm';
@@ -27,5 +28,8 @@ export class Project extends AuditEntity{
 
     @OneToMany(() => Report, (report) => report.project)
     reports: Report[];
+
+    @OneToMany(() => Task, task => task.project)
+    tasks: Task[];
     
 }

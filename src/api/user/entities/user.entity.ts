@@ -4,12 +4,14 @@ import {
   Column,
   Entity,
   ManyToOne,
+  OneToMany,
 } from 'typeorm';
 import { UserGender } from '../enums/userGender.enum';
 import { UserRoles } from '../enums/roles.enum';
 import { AuditEntity } from '../../../common/db/customBaseEntites/AuditEntity';
 import { UserStatus } from '../enums/userStatus';
 import { Report } from 'src/api/report/entities/report.entity';
+import { Task } from 'src/api/task/entities/task.entity';
 
 @Entity('users')
 export class User extends AuditEntity {
@@ -79,5 +81,8 @@ export class User extends AuditEntity {
 
   @ManyToOne(() => Report, (report) => report.user)
   reports: Report[]
+
+  @OneToMany(() => Task , (task) => task.user)
+  tasks : Task[]
 
 } 
