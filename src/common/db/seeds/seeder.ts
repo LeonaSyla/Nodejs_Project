@@ -9,5 +9,5 @@ import { RolesSeeder } from './roles/create-role.seed';
 
 seeder({
   imports: [TypeOrmModule.forRoot(config as DataSourceOptions)],
-}).run([RolesSeeder]);
+}).run([ RolesSeeder]);
 

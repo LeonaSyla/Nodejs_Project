@@ -1,8 +1,9 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Report } from 'src/api/report/entities/report.entity';
 import { User } from 'src/api/user/entities/user.entity';
 import { AuditEntity } from 'src/common/db/customBaseEntites/AuditEntity';
-import { Entity, Column, ManyToMany, JoinTable} from 'typeorm';
+import { Entity, Column, ManyToMany, JoinTable, ManyToOne, OneToMany} from 'typeorm';
 import { ProjectType } from '../enums/types.enum';
 
 @Entity('projects')
@@ -23,4 +24,8 @@ export class Project extends AuditEntity{
     @ManyToMany(() => User)
     @JoinTable()
     users: User[];
+
+    @OneToMany(() => Report, (report) => report.project)
+    reports: Report[];
+    
 }

@@ -22,7 +22,7 @@ import {
   @UseGuards(new RolesGuard())
   @ApiBearerAuth()
   @ApiTags('Roles')
-  @Controller('api/roles')
+  @Controller('roles')
   export class RoleController {
     constructor(private readonly roleService: RoleService) {}
   

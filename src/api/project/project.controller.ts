@@ -16,7 +16,7 @@ import {  CreateProjectDto } from './dtos/create-project.dto';
 export class ProjectController {
   constructor(private readonly projectService: ProjectService) {}
 
-  //@Roles(UserRoles.ADMIN)
+
   @Public()
   @Get()
   async getProject(): Promise<Project[]> {
@@ -48,6 +48,12 @@ async updateProject(
     @Delete(':id')
     async removeProject(@Param('id') id:string) : Promise<void>{
       return await this.projectService.removeProject(id);
+    }
+
+    @Public()
+    @Post(':id/users/:userId')
+    async addUserToProject(@Param('id') projectId: string, @Param('userId') userId: string): Promise<void> {
+    return await this.projectService.addUserToProject(projectId, userId);
     }
     
 }

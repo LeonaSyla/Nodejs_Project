@@ -8,6 +8,7 @@ import { BaseCustomRepository } from '../../../common/db/customBaseRepository/Ba
 import { CreateProjectDto } from '../dtos/create-project.dto';
 import { HttpException, UnprocessableEntityException } from '@nestjs/common';
 import { UpdateProjectDto } from '../dtos/update-project.dto';
+import { User } from 'src/api/user/entities/user.entity';
 
 @CustomRepository(Project)
 export class ProjectRepository
@@ -46,5 +47,12 @@ export class ProjectRepository
     const project = await this.findOneBy({uuid:projectId})
     await this.delete(project.id);
   }
-  
+
+  async addUserToProject(projectId:string, userId: string) :Promise<void>{
+    const project = await this.getProjectById(projectId)
+    const user = await this.manager.findOne(User, { where :{uuid: userId}})
+
+    project.users.push(user);
+    await this.save(project);
+  }
 }
