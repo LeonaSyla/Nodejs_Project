@@ -15,6 +15,5 @@ export class CreateProjectDto {
   @IsEnum(ProjectType)
   @ApiProperty()
   type: ProjectType;
-  description: any;
 }
 
