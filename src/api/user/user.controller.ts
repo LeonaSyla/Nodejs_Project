@@ -58,13 +58,13 @@ export class UserController implements IUserController {
   }
 
   // example how roles work
-  @Roles(UserRoles.ADMIN)
+  //@Roles(UserRoles.ADMIN)
   @Get(':userId')
   async findOne(@Param('userId') userId: string): Promise<User> {
     return await this.usersService.findOne(userId);
   }
 
-  @Roles(UserRoles.USER)
+  //@Roles(UserRoles.USER)
   @Get()
   @UseInterceptors(PaginationInterceptor)
   async findAll(): Promise<User[]> {
@@ -79,7 +79,7 @@ export class UserController implements IUserController {
     return await this.usersService.update(user.uuid, updateUserDto);
   }
 
-  @Roles(UserRoles.ADMIN)
+  //@Roles(UserRoles.ADMIN)
   @Patch(':userId')
   async updateUser(
     @Param('userId') userId: string,
@@ -88,13 +88,13 @@ export class UserController implements IUserController {
     return await this.usersService.update(userId, updateUserDto);
   }
 
-  @Roles(UserRoles.ADMIN)
+  //@Roles(UserRoles.ADMIN)
   @Delete(':userId')
   async remove(@Param('userId') userId: string): Promise<void> {
     return await this.usersService.remove(userId);
   }
 
-  @Roles(UserRoles.ADMIN)
+  //@Roles(UserRoles.ADMIN)
   @Post('add-permission/:userId')
   async addPermission(
     @Param('userId') userId: string,
@@ -103,7 +103,7 @@ export class UserController implements IUserController {
     return this.usersService.addPermission(userId, permission);
   }
 
-  @Roles(UserRoles.ADMIN)
+  //@Roles(UserRoles.ADMIN)
   @Post('remove-permission/:userId')
   async removePermission(
     @Param('userId') userId: string,

@@ -7,17 +7,17 @@ import {
   Param,
   Post,
   Put,
-  UseGuards,
+  //UseGuards,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Public } from 'src/common/decorators/public.decorator';
-import { RolesGuard } from 'src/common/guards/roles.guard';
+//import { RolesGuard } from 'src/common/guards/roles.guard';
 import { CreateTaskDto } from './dtos/create-task.dto';
 import { UpdateTaskDto } from './dtos/update-task.dto';
 import { Task } from './entities/task.entity';
 import { TaskService } from './task.service';
 
-@UseGuards(new RolesGuard())
+//@UseGuards(new RolesGuard())
 @ApiTags('Task')
 @Controller('task')
 export class TaskController {

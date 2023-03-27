@@ -1,15 +1,5 @@
 /* eslint-disable prettier/prettier */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable prettier/prettier */
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  UseGuards,
-  
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, UseGuards } from '@nestjs/common';
 import { RolesGuard } from '../../common/guards/roles.guard';
 import { ApiTags } from '@nestjs/swagger';
 import { Public } from 'src/common/decorators/public.decorator';
@@ -19,15 +9,14 @@ import { CreateReportDto } from './dtos/create-report.dto';
 
 @UseGuards(new RolesGuard())
 @ApiTags('Report')
-@Controller('Report')
+@Controller('/report')
 export class ReportController {
-constructor(private readonly reportService: ReportService) {}
-
+  constructor(private readonly reportService: ReportService) {}
 
   @Public()
   @Get()
   async getProject(): Promise<Report[]> {
-      return await this.reportService.getReport();
+    return await this.reportService.getReport();
   }
 
   @Public()
@@ -38,17 +27,17 @@ constructor(private readonly reportService: ReportService) {}
 
   @Public()
   @Get(':id')
-  async getReportById(@Param('id') id : string) : Promise<Report>{
+  async getReportById(@Param('id') id: string): Promise<Report> {
     return await this.reportService.getReportById(id);
   }
 
   @Public()
   @Post('/add/:reportId/:projectId')
   assignProjectToReport(
-  @Param('reportId') reportId: string,
-  @Param('projectId') projectId: string,
+    @Param('reportId') reportId: string,
+    @Param('projectId') projectId: string,
   ) {
-  return this.reportService.assignProjectToReport(reportId, projectId);
+    return this.reportService.assignProjectToReport(reportId, projectId);
   }
 
   @Public()
@@ -59,5 +48,4 @@ constructor(private readonly reportService: ReportService) {}
   ) {
     return this.reportService.assignUserToReport(reportId, userId);
   }
-
 }
